@@ -6,7 +6,7 @@ import { profile } from "@/lib/data";
 import { ScrollReveal } from "./ScrollReveal";
 
 // Replace with your own Formspree form ID: https://formspree.io/forms
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xgojqjzk";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
