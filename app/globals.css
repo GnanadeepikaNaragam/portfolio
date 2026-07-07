@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-space-grotesk: "Space Grotesk", sans-serif;
+    --font-inter: "Inter", sans-serif;
+    --font-jetbrains: "JetBrains Mono", monospace;
+
+    /* Dark theme (default) */
+    --color-ink: #0c1116;
+    --color-ink-soft: #0f151b;
+    --color-surface: #151b22;
+    --color-surface-raised: #1b222a;
+    --color-border: #232b33;
+    --color-border-soft: #1a2129;
+    --color-text-primary: #eaeff3;
+    --color-text-muted: #8b98a9;
+    --color-text-dim: #5c6773;
+    --color-amber: #e7a33e;
+    --color-amber-soft: #f2c87a;
+    --color-teal: #3fd9c7;
+    --color-teal-soft: #8fefe3;
+    /* Text/icon color guaranteed readable on top of teal/amber buttons, in either theme */
+    --color-on-accent: #06110f;
+
+    --glow-teal: rgba(63, 217, 199, 0.06);
+    --glow-amber: rgba(231, 163, 62, 0.05);
+    --selection-bg: rgba(63, 217, 199, 0.25);
+    --focus-ring: #3fd9c7;
+  }
+
+  html.light {
+    --color-ink: #f6f4ef;
+    --color-ink-soft: #fbfaf7;
+    --color-surface: #ffffff;
+    --color-surface-raised: #f1efe8;
+    --color-border: #ded9cd;
+    --color-border-soft: #e8e3d8;
+    --color-text-primary: #181f26;
+    --color-text-muted: #4b5768;
+    --color-text-dim: #6b7686;
+    /* Darkened for AA contrast against a light/white surface */
+    --color-amber: #a8660e;
+    --color-amber-soft: #8a5309;
+    --color-teal: #0e7a6c;
+    --color-teal-soft: #0a5c51;
+
+    --glow-teal: rgba(14, 122, 108, 0.07);
+    --glow-amber: rgba(168, 102, 14, 0.06);
+    --selection-bg: rgba(14, 122, 108, 0.18);
+    --focus-ring: #0e7a6c;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-ink text-text-primary font-body antialiased;
+    background-image: radial-gradient(circle at 15% 0%, var(--glow-teal), transparent 40%),
+      radial-gradient(circle at 85% 20%, var(--glow-amber), transparent 45%);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .container-px {
+    @apply px-6 sm:px-10 lg:px-16;
+  }
+
+  .label-mono {
+    @apply font-mono text-[0.7rem] tracking-[0.18em] uppercase text-teal;
+  }
+
+  .divider-log {
+    @apply flex items-center gap-3 text-text-dim font-mono text-xs;
+  }
+
+  .divider-log::before,
+  .divider-log::after {
+    content: "";
+    @apply h-px flex-1 bg-border;
+  }
+
+  .card-surface {
+    @apply border transition-colors duration-300;
+    background-color: color-mix(in srgb, var(--color-surface) 60%, transparent);
+    border-color: var(--color-border);
+    backdrop-filter: blur(4px);
+  }
+
+  html.light .card-surface {
+    background-color: var(--color-surface);
+    box-shadow: 0 1px 3px rgba(24, 31, 38, 0.06);
+  }
+
+  .glow-ring {
+    box-shadow: 0 0 0 1px var(--glow-teal), 0 0 24px var(--glow-teal);
+  }
+}
